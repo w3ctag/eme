@@ -86,15 +86,15 @@ The Technical Architecture Group recommends an architecture for the web platform
 
 The Encrypted Media Extensions in [the Encrypted Media Extensions Working Draft](http://www.w3.org/TR/encrypted-media/) "define a common API that may be used to discover, select and interact with [content protection or Digital Rights Management] systems as well as with simpler content encryption systems" as part of the [HTML Working Group's chartered aim of "supporting playback of protected content"](http://www.w3.org/2013/09/html-charter.html).
 
-The approach taken within the EME specification is to provide a common, platform independent interface to support playback of content that has been protected through encryption. But this common interface encapsulates a "black box" of encryption technologies and very little has been specified about the way in which the technologies inside this black box operate.
+The approach taken within the EME specification is to provide a common, platform independent interface to support playback of content that has been protected through encryption. But this common interface encapsulates a "black box" (the Digital Rights Management system) and very little has been specified about the way in which the technologies inside this black box operate.
 
 ### Platform Independence
 
-We have seen, in the use of the `<object>` tag, that standard interfaces over platform-dependent technologies do not turn the platform-dependent technologies into platform-independent ones. So when considering protected content on the web, we have to ensure that the "black box" of encryption technologies is platform independent, as well as the interface that surrounds it.
+We have seen, in the use of the `<object>` tag, that standard interfaces over platform-dependent technologies do not turn the platform-dependent technologies into platform-independent ones. So when considering protected content on the web, we have to ensure that the DRM "black box" is platform independent, as well as the interface that surrounds it.
 
-Platform-dependent encryption technologies use private/secret/proprietary algorithms to encrypt and decrypt content. Because these technologies are private/secret/proprietary, a user's ability to use them will depend on their use of a particular platform. A content publisher may come to a deal with the owners of a particular platform to provide that content exclusively through that platform. They would then use the proprietary algorithm to encrypt the content, which could then only be decrypted on the proprietary platform.
+Platform-dependent DRM systems use private/secret/proprietary algorithms to encrypt and decrypt content. Because these technologies are private/secret/proprietary, a user's ability to use them will depend on their use of a particular platform. A content publisher may come to a deal with the owners of a particular platform to provide that content exclusively through that platform. They would then use the proprietary algorithm to encrypt the content, which could then only be decrypted on the proprietary platform.
 
-Platform-independent encryption technologies use a combination of public, standard algorithms to perform the de/encryption of content, and private/secret keys that are only known by those who are authorised to access the content.
+Platform-independent DRM would have to use a combination of public, standard algorithms to perform the de/encryption of content, and private/secret keys that are only known by those who are authorised to access the content.
 
 A mechanism for ensuring that encrypted media could be used on the web without undermining the principle of platform independence would be to define a standard set of public, standard, encryption algorithms that can be used, coupled with a standard mechanism for accessing a key to decrypt encrypted media.
 
