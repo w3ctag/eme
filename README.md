@@ -32,8 +32,6 @@ Viewing content that is supplied through a plugin requires the user to install t
   * the platform the user is using does not permit the installation of additional software, for example locked-down, managed business laptops
   * the user does not want to install a plugin, for example because of security or ethical concerns
 
-Content that is accessed through a plugin is also rarely accessible to other technologies in use on the web. It cannot be linked to from other pages (reducing the number of links that could be made, and thus reducing the value of the web). It can be hard to index by search engines.
-
 The eventual impact of this on the web and on users of the web can be illustrated by looking at the history of Flash. Flash is a plugin for providing graphically impressive content within web pages. For a while, there was a "virtuous" cycle that supported the use of Flash:
 
   * most platforms supported Flash and Flash provided a better user experience than plain HTML
