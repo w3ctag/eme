@@ -92,13 +92,18 @@ The approach taken within the EME specification is to provide a common, platform
 
 We have seen, in the use of the `<object>` tag, that standard interfaces over platform-dependent technologies do not turn the platform-dependent technologies into platform-independent ones. So when considering protected content on the web, we have to ensure that the DRM "black box" is platform independent, as well as the interface that surrounds it.
 
-Platform-dependent DRM systems use private/secret/proprietary algorithms to encrypt and decrypt content. Because these technologies are private/secret/proprietary, a user's ability to use them will depend on their use of a particular platform. A content publisher may come to a deal with the owners of a particular platform to provide that content exclusively through that platform. They would then use the proprietary algorithm to encrypt the content, which could then only be decrypted on the proprietary platform.
+Platform dependence in DRM arises from two main sources:
 
-Platform-independent DRM would have to use a combination of public, standard algorithms to perform the de/encryption of content, and private/secret keys that are only known by those who are authorised to access the content.
+  * using proprietary encryption algorithms
+  * requiring the use of proprietary methods to access keys
 
-A mechanism for ensuring that encrypted media could be used on the web without undermining the principle of platform independence would be to define a standard set of public, standard, encryption algorithms that can be used, coupled with a standard mechanism for accessing a key to decrypt encrypted media.
+When aspects of a DRM system are private/secret/proprietary, a user's ability to use them will depend on their use of a particular platform. A content publisher may come to a deal with the owners of a particular platform to provide that content exclusively through that platform. They would then use the proprietary methods of encrypting the content or providing the keys to decrypt the content, knowing that decryption could only occur on the proprietary platform.
 
-**The EME specification must ensure platform independence, for example by specifying the use of open standard encryption algorithms.** 
+Platform-independent DRM would have to use a combination of public, standard algorithms to perform the de/encryption of content, and private/secret keys that are only known by those who are authorised to access the content but that can be accessed regardless of platform.
+
+A mechanism for ensuring that encrypted media could be used on the web without undermining the principle of platform independence would be to define a standard set of public, open, standard, encryption algorithms that can be used, coupled with a public, open, standard mechanism for accessing a key to decrypt encrypted media.
+
+**The HTML Working Group must ensure that playback of protected content is supported in a platform independent way.** 
 
 ### Accessibility
 
