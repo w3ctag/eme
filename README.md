@@ -100,9 +100,13 @@ A mechanism for ensuring that encrypted media could be used on the web without u
 
 ### Accessibility
 
-DRM systems usually prohibit any manipulations with content including displaying third-party subtitles, or (in case of e-books) reading a book using system voice-over engine, thus making a content less accessible by disabled people. This practice is incompatible with an effort to make Web more accessible. 
+Core idea of EME systems is that of restricting user access to digital media. At the same time system accessibility features explicitly need to have such an access to work.
 
-**The EME specification must address accessibility by specifying how content made available through EME can be manipulated.**
+**The EME specification must ensure that no possibility to make a content more accessible is lost because of EME usage**. This includes, but not limited to:
+  * ensuring that media content may be redirected to certain system services;
+  * ensuring that every piece of digital content is available in its original form (for example, subtitles are not blended into video, etc);
+  * ensuring that standard operations (adjusting contrast, using third-party subtitles or audio-stream) may be applied to restricted media;
+  * unsuring that restricted media from different sources provided by different EME systems (for example, video from one source and sign-language interpretation of that video from another source) may be used simultaneously.
 
 ### Security
 
