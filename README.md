@@ -2,7 +2,7 @@
 
 **This is an unreviewed draft by Jeni Tennison, with contributions from Sergey Konstantinov and Peter Linss, and does not represent official TAG or W3C opinion.**
 
-The goal of the web is to enable people to freely and easily share information with each other. This is the source of its beneficial impact on society. It is important that the architecture of the web and the technologies that we use on the web do not undermine the social goal of the web.
+A goal of the web is to enable people to freely and easily share information with each other. This is one source of its beneficial impact on society. It is important that the architecture of the web and the technologies that we use on the web do not undermine this social goal of the web.
 
 This goal of supporting free and easy sharing of information does not imply that all information on the web must be available to all people all the time. The web can also be used to share information with restricted groups of people. For example, to protect our privacy, it should be possible to share information that no one can see aside from the intended recipients. And because of this need for privacy, the web needs to also be secure and trustworthy.
 
