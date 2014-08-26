@@ -1,49 +1,46 @@
-*This is EME Opinion Draft proposed by Sergey Konstantinov*.
-<a href="http://www.w3.org/TR/2014/WD-encrypted-media-20140218/">Draft under discussion</a>
+# W3C TAG EME Opinion: DRAFT
 
-**Technical Problems**
+[Draft under discussion](https://dvcs.w3.org/hg/html-media/raw-file/tip/encrypted-media/encrypted-media.html)
 
-There are two major problems in current EME design.<br/>
-1. Security and privacy issues.<br/>
-2. Architectural issues.<br/>
+_This is a draft opinion on EME proposed by Domenic Denicola and Sergey Konstantinov. It is intended to catalog the TAG’s concerns and guiding principles, without focusing on solutions or implementation details._
 
-In the current scheme, the CDM uses the browser (user agent) as a channel for transferring information to a third-party server and getting responses back. The scheme doesn't set any limit on what information could be sent and received; furthermore, the encryption algorithms used are intended to be kept secret.
+Above all else, we believe EME should be a web platform API, and embody all that this means. It should not just be an API that exposes existing DRM systems to applications, similarly to how the media capture API is not simply an API that exposes existing webcam drivers to applications, or the Media Source Extensions does not simply expose existing video codecs. As a consequence, it should focus strongly on interoperability and standardized behavior, in the same fashion as all other existing web APIs do.
 
-This scheme exposes two kinds of potential risks.<br/>
-1.1. Risk of spoiling private information via license requests. If the license request contains any kind of information unknown to user agent (including CDM versions and hardware support information, which could be used for fingerprinting), it could be extracted if there was either a vulnerability in the encryption algorithm or if the License Server master key was compromised.  Such problems occurred previously with browser extensions (for example, <a href="http://techdetails.agwego.com/2008/02/11/37/">user MAC address sniffing via Java applet</a>).<br/>
-1.2. Risk of exploiting vulnerabilities in response parsing code. Since license response formats are to be kept in secret, CDMs will have proprietary response decrypting algorithms which could be compromised, thus creating a vector of attack via malformed license response. This kind of vulnerability (malformed proprietary data format) is a known method of attack against web users.<br/>
+We understand that designing a DRM system for the web brings along robustness requirements that are unlike those of most web APIs, and cause a tension with the usual way specifications are developed openly. EME has chosen to address this via the idea of a CDM, which encapsulates unspecified behavior necessary for robustness. But just because the CDM’s behavior is undefined, does not mean that EME as a whole becomes a free-for-all that can ignore how the web platform works.
 
-Coincidentally, the security problems are strictly related to architectural ones:<br/>
-2.1. Using the CDM for user authentication and license checking is wrong from architectural point of view. Issuing license requests and checking responses is clearly not a responsibility of a <em>Content Decryption Module</em>. Obviously, the webapp must be capable of identifying the user and checking user permissions on its own behalf; why the <em>decryption</em> module needs to check the <em>license</em> is difficult to understand. Correct separation of concerns should limit CDM's responsibility to (a) establishing a secure channel to third-party server (CDN), (b) decrypt frames. So, in fact, there is no need in either license request or response, both could be easily replaced with handshaking.<br/>
-2.2. The EME proposal specifies some objects and interfaces (notably MediaKeys) which are already defined in <a href="http://www.w3.org/TR/WebCryptoAPI/">WebCrypto API</a>, and exposes its own APIs instead of relying on underlying low-level system capabilities. Conversely, using standard system key storage and encryption algorithms could significantly decrease risks of exploitation of possible CDM vulnerabilities.<br/>
+Our concerns break down into three areas.
 
-**Sandboxing**
+## Author-Facing Interoperability Between Key Systems
 
-In our opinion, using such a scheme without additional security measures is extremely risky. All EME implementations which use current scheme with proprietary license request and response formats `MUST` put CDM in sandbox, thus (a) restricting its access to any sensitive information, (b) limiting possibilities to exploit CDM vulnerabilities.
+It should be possible for a single web application to support multiple key systems, without writing code specific to each one, in a similar fashion to a web application supporting multiple video or audio codecs. Like codecs, the details of implementing a given key system may be hidden or proprietary. But this remains an implementation detail from an author-facing perspective. Authors should not care about which key system is in use, and after selecting one, all code they write should be the same no matter which key system was selected.
 
-**Interoperability**
+As a consequence of this, the capabilities of a pre-existing DRM system are not useful for guiding discussion. The goal of EME should be a common-denominator API that can be used to interface with all DRM systems equally.
 
-Apart from pure technical issues, TAG keeps in mind several questions which have no clear answers at this point:
+Although CDMs are necessarily underspecified for robustness reasons, this should not be used as a loophole to drive through vendor-specific behavior. Out-of-band communication (via the CDM or otherwise) should not be possible, nor should vendor-specific extensions or extension points be blessed into the spec. If a vendor is in favor of adding a given capability to EME---perhaps a feature their CDM supports---then they should not do so through a side-channel or extension point of the EME API, but instead through the normal standardization process for web platform features.
 
-1. I am an indie studio; what should I do in order to have my content protected by popular DRM systems?
-2. I am an indie browser maker; what should I do in order to make my browser capable of using popular CDMs?
-3. I am an indie DRM vendor; what should I do in order to make browsers support my CDM?
+In general, given that CDMs are underspecified, their author-facing scope should be normatively limited as much as is possible while still giving the desired robustness guarantees.
 
-In our opinion, these questions need developing formal procedures since current EME scheme could eventually lead to segmentation and fragmentation of the Internet for pure marketing reasons.
+## User-Facing Concerns
 
-**Alternative**
+As part of interoperability, EME should not provide APIs that are designed to allow restriction of content to one platform and/or key system. The web’s platform-independence is its greatest strength, and EME should not provide a means for either content providers or authors to bypass it. While certain key systems may only be supported on certain platforms, and certain content may only be available with certain key systems, such restrictions should simply be features of the ecosystem and not sanctioned by EME. Similarly, when introducing features to EME (or to any web API), the extent to which they allow platform discrimination should be carefully considered.
 
-In our opinion, we should possibly present to market appropriate alternative to proprietary formats by creating an open and standardized license and encryped media data exchange formats. Such standard should:
+As an analogy, while the H.264 codec is not available to all user agents, this is simply a matter of user-agent engineering effort, and the <video> tag does not provide a mechanism for disallowing H.264 content on Linux, for example. And while a given video may not be encoded in a given codec, this is simply a matter of the content provider choosing not to support that codec.
 
-1. Eliminate possible security and privacy issues by replacing license request and response with exchanging of standardized public keys and certificates.<br/>
-2. Replace custom data structures (MediaKeys, KeySystem) with corresponding WebCrypto entities.<br/>
-3. Rely on system key storage instead of using CDM itself.<br/>
+We are also deeply concerned about the security and privacy implications of EME. The ability of the CDM to potentially run arbitrary code is a hole in the web platform’s security model. To the extent that privacy-invasive or security-compromising features can be normatively disallowed, EME should do so. To the extent that they cannot be, e.g. for robustness reasons, we should restrict access to those features such that they can only be used from secure origins, so as to make them less accessible to attackers.
 
-A proper scheme of CDM, user agent, and third-party servers interaction should be as follows.<br/>
+Speaking to both of these areas, the way in which the CDM currently provides a potentially-permanent cryptographic identifier to identify the client or user is troubling. It can serve as an unspoofable user-agent string, with all of the attendant risks, and is a glaring privacy hole. Again, if nothing else, this kind of power should not be given to arbitrary coffee-shop attackers, and thus should be limited to secure origins.
 
-1. The CDM provides its cryptographic key material into system key storage upon installation.<br/>
-2. When the user requests some protected content, the webapp (a) authenticates the user and checks permissions; (b) prepares session information (user id, content id, session id, etc); (c) encrypts or signs session information with the CDM keying material; (d) derives public session key from the CDM keying material; (e) sends encrypted/signed session data and session key to the CDN.<br/>
-3. In response to such a request, the CDN generates a second public session key and (optionally) a public certificate and sends them back to the webapp; the webapp then attaches the key and certificate to the media element; the user agent passes the key and certificate to the CDM.<br/>
-4. The user agent streams encrypted frames from CDN to CDM to be decrypted using passed session key and redirected to video output.<br/>
+## Platform Segmentation
 
-Any additional functionality, if needed, should be implemented as a part of corresponding low-level APIs (WebCrypto, Streams, etc.)
+We are concerned about segmentation of the platform between different user agents, content providers, and and authors. No existing web API relies upon those using it or implementing it to negotiate business deals, and we would prefer that EME is no different. To meet the normal bar for a web platform API:
+
+- Independent content providers should be able to use EME to protect their content just as easily as large media companies.
+- New browser vendors should be able to add EME support to their browser based on open standards, without needing to license technology. This should ideally be possible both for new desktop browsers and for new mobile browsers or new devices.
+- New key systems should be able to join the EME ecosystem by implementing an open standard.
+- Content providers should be able to implement and interface with multiple key systems via the same code, without dealing with inconsistency in feature sets or behaviors.
+
+## Closing Words
+
+We recognize that many of our concerns are in conflict with conventional DRM systems. However, we are hopeful that they are not in conflict with EME, as an API that desires to bring DRM to the web platform. That is, we recognize that resolving them might not be possible as-is, but we still see them as goals to strive for.
+
+The benefits of EME to content providers, user agents, and authors are clear: it allows a plug-in free way of distributing protected content, to the wide audience of web users. But like all other APIs that allow us to reach web users, that reach comes at a cost: the API must be interoperable, open, and both platform-independent and content-provider independent. Any DRM system that wants to be part of the open web platform needs to play by these rules, and the fact that existing solutions deployed on the web (e.g. NPAPI plugins) fail to do so is not an excuse for EME to hide behind.
