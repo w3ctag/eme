@@ -30,6 +30,18 @@ We are also deeply concerned about the security and privacy implications of EME.
 
 Speaking to both of these areas, the way in which the CDM currently provides a potentially-permanent cryptographic identifier to identify the client or user is troubling. It can serve as an unspoofable user-agent string, with all of the attendant risks, and is a glaring privacy hole. Again, if nothing else, this kind of power should not be given to arbitrary coffee-shop attackers, and thus should be limited to secure origins.
 
+### Fraud Prevention
+
+Proprietary license formats also raise a fraud problem since user cannot read proprietary and/or encrypted license and therefore cannot check whether license terms are those ones he or she paid for. In our view user-agent should be able to read license response and present that information to user.
+
+### Accessibility
+
+Web platform is designed to be accessible, and EME should not be an exclusion from this rule. EME API should ensure that accessibility services (such as speech recognition, text recognition, Braille terminal output), once they appear in browsers, will have an access to unencrypted audio/video stream if they comply with robustness requirements.
+
+### Fair Use
+
+DRM systems tend to restrict user rights to use content fairly. For example, some DRM-enabled e-book readers don't have text copy functions, and some DRM-enabled video players don't allow making screenshots. In our opinion, EME API should provide to user agent a possibilty to make quotations.
+
 ## Platform Segmentation
 
 We are concerned about segmentation of the platform between different user agents, content providers, and and authors. No existing web API relies upon those using it or implementing it to negotiate business deals, and we would prefer that EME is no different. To meet the normal bar for a web platform API:
@@ -38,6 +50,10 @@ We are concerned about segmentation of the platform between different user agent
 - New browser vendors should be able to add EME support to their browser based on open standards, without needing to license technology. This should ideally be possible both for new desktop browsers and for new mobile browsers or new devices.
 - New key systems should be able to join the EME ecosystem by implementing an open standard.
 - Content providers should be able to implement and interface with multiple key systems via the same code, without dealing with inconsistency in feature sets or behaviors.
+
+## Anti-Circumvention Law
+
+DRM systems are protected by anti-circumvention law which prohibits probing and penetration testing of DRM features. This principle impose considerable risks on web security specialists. In our opinion this problem should be evaluated from both legal perpective (setting some kind of requirement not to bring anti-circumvention suits in order to use EME) and technical one (building API atop of low-level WebCrypto primitives).
 
 ## Closing Words
 
