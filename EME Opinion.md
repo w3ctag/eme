@@ -8,7 +8,7 @@ Above all else, we believe EME should be a web platform API, and embody all that
 
 We understand that designing a DRM system for the web brings along robustness requirements that are unlike those of most web APIs, and cause a tension with the usual way specifications are developed openly. EME has chosen to address this via the idea of a CDM, which encapsulates unspecified behavior necessary for robustness. But just because the CDM’s behavior is undefined, does not mean that EME as a whole becomes a free-for-all that can ignore how the web platform works.
 
-Our concerns break down into three areas.
+Our concerns break down into several areas.
 
 ## Author-Facing Interoperability Between Key Systems
 
