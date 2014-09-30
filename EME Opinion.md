@@ -6,7 +6,7 @@ _This is a draft opinion on EME proposed by Domenic Denicola and Sergey Konstant
 
 Above all else, we believe EME should be a web platform API, and embody all that this means. It should not just be an API that exposes existing DRM systems to applications, similarly to how the media capture API is not simply an API that exposes existing webcam drivers to applications, or the Media Source Extensions does not simply expose existing video codecs. As a consequence, it should focus strongly on interoperability and standardized behavior, in the same fashion as all other existing web APIs do.
 
-We understand that designing a DRM system for the web brings along robustness requirements that are unlike those of most web APIs, and cause a tension with the usual way specifications are developed openly. EME has chosen to address this via the idea of a CDM, which encapsulates unspecified behavior necessary for robustness. But just because the CDM’s behavior is undefined, does not mean that EME as a whole becomes a free-for-all that can ignore how the web platform works.
+We understand that the historical way of designing a DRM system has involved robustness requirements that are unlike those of most web APIs, and cause a tension with the usual way specifications are developed openly.  EME has chosen to address this via the idea of a CDM, which encapsulates unspecified behavior necessary for robustness. But just because the CDM’s behavior is undefined, does not mean that EME as a whole becomes a  free-for-all that can ignore how the web platform works.
 
 Our concerns break down into three areas.
 
