@@ -30,6 +30,10 @@ We are also deeply concerned about the security and privacy implications of EME.
 
 Speaking to both of these areas, the way in which the CDM currently provides a potentially-permanent cryptographic identifier to identify the client or user is troubling. It can serve as an unspoofable user-agent string, with all of the attendant risks, and is a glaring privacy hole. Again, if nothing else, this kind of power should not be given to arbitrary coffee-shop attackers, and thus should be limited to secure origins.
 
+Another attack we are concerned about is the possibility of proprietary/encrypted license formats to decieve the user. The user agent should be able to read license the response and present that information to the user.
+
+Finally, we are concerned that encrypted media achieve the same level of accessibility as other media. This is partially a quality-of-implementation concern, but there may be ways the spec could normatively encourage it. Specific examples include ensuring the correct interaction with high-contrast mode and captioning systems.
+
 ## Platform Segmentation
 
 We are concerned about segmentation of the platform between different user agents, content providers, and and authors. No existing web API relies upon those using it or implementing it to negotiate business deals, and we would prefer that EME is no different. To meet the normal bar for a web platform API:
@@ -38,6 +42,10 @@ We are concerned about segmentation of the platform between different user agent
 - New browser vendors should be able to add EME support to their browser based on open standards, without needing to license technology. This should ideally be possible both for new desktop browsers and for new mobile browsers or new devices.
 - New key systems should be able to join the EME ecosystem by implementing an open standard.
 - Content providers should be able to implement and interface with multiple key systems via the same code, without dealing with inconsistency in feature sets or behaviors.
+
+## Security
+
+Although this is tangential to our technical review, we are concerned about the way that DRM systems are protected by anti-circumvention laws, which prohibit probing and penetration testing of DRM features. This principle impose considerable risks on web security specialists, and upon users in having to accept APIs that recieve less than the usual level of scrutiny. We do not expect the specification or implementers to solve this, but we have reached out to the Advisory Board to discuss ways the TAG and AB can collaborate to solve this problem, which is both technical and legal in nature.
 
 ## Closing Words
 
