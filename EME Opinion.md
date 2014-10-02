@@ -1,8 +1,6 @@
-# W3C TAG EME Opinion: DRAFT
+# W3C TAG EME Opinion
 
 [Draft under discussion](https://dvcs.w3.org/hg/html-media/raw-file/tip/encrypted-media/encrypted-media.html)
-
-_This is a draft opinion on EME proposed by Domenic Denicola and Sergey Konstantinov. It is intended to catalog the TAG’s concerns and guiding principles, without focusing on solutions or implementation details._
 
 Above all else, we believe EME should be a web platform API, and embody all that this means. It should not just be an API that exposes existing DRM systems to applications, similarly to how the media capture API is not simply an API that exposes existing webcam drivers to applications, or the Media Source Extensions does not simply expose existing video codecs. As a consequence, it should focus strongly on interoperability and standardized behavior, in the same fashion as all other existing web APIs do.
 
