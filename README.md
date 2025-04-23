@@ -1,0 +1,1 @@
+This repository is archived because the TAG is no longer working on an EME position. The most recent statement of the TAG's position on the topic is in https://github.com/w3ctag/design-reviews/blob/master/2014/10/eme.md.
